@@ -4,17 +4,7 @@
 
 [![](https://img.shields.io/badge/Advent%20of%20Code-000000?style=for-the-badge&logo=adventofcode&logoColor=white&)][aoc-official] [![](https://img.shields.io/badge/Plain%20Bagel-FFA500?style=for-the-badge&logo=plainbagel&logoColor=white)][pbagel-official] [![licence](https://img.shields.io/github/license/plain-bagel/AoC-2023?style=for-the-badge)](./LICENSE) [![](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://plainbagel.slack.com/archives/C067RSCDC78)
 
-## Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-      - [1. Be the BAGELER](#1-be-the-bageler)
-      - [2. Sign up for Advent of Code](#2-sign-up-for-advent-of-code)
-      - [3. Join the leaderboard](#3-join-the-leaderboard)
-    - [Solve the puzzles](#solve-the-puzzles)
-    - [Share your solution](#share-your-solution)
-- [License](#license)
+[About](#about) | [Getting Started](#getting-started) | [Prerequisites](#prerequisites) | [Solve the puzzles](#solve-the-puzzles) | [Share your solution](#share-your-solution) | [License](#license)
 
 ## About
 
