@@ -32,7 +32,7 @@
 
 1. Go to [Advent of Code][aoc-official]
 2. 상단 `[ Log In ]` 버튼을 클릭합니다.
-3. 아래에 다음과 같은 메시지가 뜨면, `[ Google ]`버튼을 눌러 로그인 합니다.
+3. 아래에 다음과 같은 메시지가 뜨면, 사용하시는 서비스의 계정을 활용해서 로그인 합니다.
 
    ```text
    To play, please identify yourself via one of these services:
