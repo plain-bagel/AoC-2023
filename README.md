@@ -103,13 +103,6 @@ MIT 라이센스를 준수합니다. [LICENSE](LICENSE)에서 자세한 정보�
 
 - [slack/plain-bagel/aoc-2023](https://plainbagel.slack.com/archives/C067RSCDC78)
 
-## Disclaimer
-
-- [Advent of Code][aoc-official] is created and maintained by [Eric Wastl][eric-wastl].
-
-- This project is not affiliated with [Advent of Code][aoc-official] or [Eric Wastl][eric-wastl].
-
-
 [aoc-2023]: https://github.com/plain-bagel/AoC-2023
 
 [aoc-official]: https://adventofcode.com
