@@ -93,7 +93,7 @@
 4. 본인의 닉네임으로 된 폴더에 문제 해결 방법을 Commit 해주세요.
 5. 문제 해결 방법이 담긴 Commit을 [plain-bagel/AoC-2023]으로 Push 합니다.
 6. Push 한 브랜치로 해당 날짜 문제에 대한 PR을 생성합니다. 
-7. PR은 모더레이터(@plain-bagel/aoc)가 확인 후 Merge합니다.
+7. PR은 모더레이터[@plain-bagel/aoc](https://github.com/orgs/plain-bagel/teams/aoc)가 확인 후 Merge합니다.
 
 ## License
 
