@@ -20,7 +20,7 @@
 
 ### Prerequisites
 
-#### 1. Be the BAGELER
+#### 1. Be a BAGELER
 
 1. [플레인베이글][pbagel-career]을 확인하세요.
 2. 원하는 직무를 선택하고, `지원하기` 를 눌러 베이글러가 되세요. 🥯🧑‍🍳
