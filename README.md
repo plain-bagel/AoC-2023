@@ -58,7 +58,7 @@
 
 ## Solve the puzzles
 
-[Advent of Code][aoc-official]에 매일 UTC+9 14:00 에 새로운 문제가 출제됩니다.
+2023년 12월 1일부터 12월 25일까지 [Advent of Code][aoc-official]에 매일 UTC+9 14:00 에 새로운 문제가 출제됩니다.
 
 원하는 프로그래밍 언어를 사용해서 문제를 해결하세요.
 
