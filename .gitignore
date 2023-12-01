@@ -504,3 +504,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/python,kotlin,swift,erlang,dart,elixir,visualstudiocode,androidstudio,xcode
+
+# Haskell GHCi config file
+.ghci
