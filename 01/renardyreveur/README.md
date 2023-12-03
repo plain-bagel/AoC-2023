@@ -23,7 +23,15 @@
     runhaskell renardyreveur/trebuchet.hs
     ```
 
+## But I'm an AI Engineer...
+
+> [!NOTE]
+> `rule_learning` 폴더 내부의 AoC 2023 Day 1, Part 1 퍼즐을 ***딥러닝으로*** 푼 코드를 참고하세요.
+
+
+
 ## Tools Used
 
 * Compiler and Evaluator Daemon: [ghcid](https://github.com/ndmitchell/ghcid)
 * Formatter: [fourmolu](https://github.com/fourmolu/fourmolu)
+* Training: [JAX](https://github.com/google/jax), no other dependencies
