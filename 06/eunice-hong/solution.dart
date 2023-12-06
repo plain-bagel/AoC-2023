@@ -31,20 +31,53 @@ void main(List<String> arguments) {
   }
 }
 
+// Get the digits in a string
+final digits = RegExp(r'\d+');
+
 /// Solution for Puzzle Part 1
 ///
 /// [input] is the contents of the input file
 String solution1(String input) {
-  // TODO(eunice-hong): My solution here
-  return input;
+  final lines = input.split('\n');
+  final times = digits
+      .allMatches(lines[0])
+      .map((m) => int.tryParse(m.group(0) ?? '0') ?? 0)
+      .where((element) => 0 < element)
+      .toList();
+
+  final distances = digits
+      .allMatches(lines[1])
+      .map((m) => int.tryParse(m.group(0) ?? '0') ?? 0)
+      .where((element) => 0 < element)
+      .toList();
+
+  return List.generate(
+    times.length,
+    (i) => _countChancePerRace(times[i], distances[i]),
+  ).fold(1, (total, record) => total * record).toString();
 }
 
 /// Solution for Puzzle Part 2
 ///
 /// [input] is the contents of the input file
 String solution2(String input) {
-  // TODO(eunice-hong): My solution here
-  return input;
+  final lines = input.split('\n');
+  final timeString =
+      digits.allMatches(lines[0]).map((e) => e.group(0)).join('');
+  final time = int.tryParse(timeString) ?? 0;
+  final distanceString =
+      digits.allMatches(lines[1]).map((e) => e.group(0)).join('');
+  final distance = int.tryParse(distanceString) ?? 0;
+  int chance = _countChancePerRace(time, distance);
+  return chance.toString();
+}
+
+/// Count chances to win per race.
+int _countChancePerRace(int time, int distance) {
+  return List.generate(time + 1, (index) => index).where((int velocity) {
+    int myDistance = velocity * (time - velocity);
+    return distance < myDistance;
+  }).length;
 }
 
 void printSolutions(String input) {
