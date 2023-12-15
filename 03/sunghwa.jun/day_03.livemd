@@ -1,0 +1,233 @@
+# Day 3: Gear Ratios
+
+## Part 1
+
+You and the Elf eventually reach a gondola lift station; he says the gondola lift will take you up to the water source, but this is as far as he can bring you. You go inside.
+
+It doesn't take long to find the gondolas, but there seems to be a problem: they're not moving.
+
+"Aaah!"
+
+You turn around to see a slightly-greasy Elf with a wrench and a look of surprise. "Sorry, I wasn't expecting anyone! The gondola lift isn't working right now; it'll still be a while before I can fix it." You offer to help.
+
+The engineer explains that an engine part seems to be missing from the engine, but nobody can figure out which one. If you can add up all the part numbers in the engine schematic, it should be easy to work out which part is missing.
+
+The engine schematic (your puzzle input) consists of a visual representation of the engine. There are lots of numbers and symbols you don't really understand, but apparently any number adjacent to a symbol, even diagonally, is a "part number" and should be included in your sum. (Periods (.) do not count as a symbol.)
+
+Here is an example engine schematic:
+
+<pre>
+467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..
+</pre>
+
+In this schematic, two numbers are not part numbers because they are not adjacent to a symbol: 114 (top right) and 58 (middle right). Every other number is adjacent to a symbol and so is a part number; their sum is 4361.
+
+Of course, the actual engine schematic is much larger. What is the sum of all of the part numbers in the engine schematic?
+
+## Input
+
+```elixir
+test_input = "467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598.."
+
+inputs = File.read!(__DIR__ <> "/day_03.in")
+```
+
+## Solution
+
+```elixir
+lines =
+  inputs
+  |> String.split()
+  |> Enum.map(fn s -> ".#{s}." end)
+
+dummy_line = String.duplicate(".", String.length(hd(lines)))
+lines = [dummy_line] ++ lines ++ [dummy_line]
+```
+
+```elixir
+defmodule NumberPos do
+  defstruct value: 0,
+            y: -1,
+            start_x: -1,
+            end_x: -1
+end
+
+defmodule SymbolPos do
+  defstruct value: "",
+            y: -1,
+            x: -1
+end
+```
+
+```elixir
+defmodule Part1 do
+  def parse(lines) do
+    parse(lines, 0, [], [])
+  end
+
+  def parse([], _y, number_list, symbol_list), do: {number_list, symbol_list}
+
+  def parse([line | tail], y, number_list, symbol_list) do
+    {number_list, symbol_list} = parse_line(line, y, number_list, symbol_list)
+    parse(tail, y + 1, number_list, symbol_list)
+  end
+
+  def parse_line(line, y, number_list, symbol_list) do
+    line_characters = String.graphemes(line)
+    IO.puts(line)
+    do_parse_line(line_characters, y, 0, "", number_list, symbol_list)
+  end
+
+  def do_parse_line([], _, _, _, number_list, symbol_list), do: {number_list, symbol_list}
+
+  def do_parse_line(["." | tail_characters], y, x, "", number_list, symbol_list) do
+    do_parse_line(tail_characters, y, x + 1, "", number_list, symbol_list)
+  end
+
+  def do_parse_line(["." | tail_characters], y, x, number_string, number_list, symbol_list) do
+    number_list = add_number_list(number_list, y, x, number_string)
+    do_parse_line(tail_characters, y, x + 1, "", number_list, symbol_list)
+  end
+
+  def do_parse_line(
+        [digit_or_symbol | tail_characters],
+        y,
+        x,
+        number_string,
+        number_list,
+        symbol_list
+      ) do
+    if Regex.match?(~r/[\d]/, digit_or_symbol) do
+      do_parse_line(
+        tail_characters,
+        y,
+        x + 1,
+        number_string <> digit_or_symbol,
+        number_list,
+        symbol_list
+      )
+    else
+      do_parse_line(
+        tail_characters,
+        y,
+        x + 1,
+        "",
+        add_number_list(number_list, y, x, number_string),
+        add_symbol_list(symbol_list, y, x, digit_or_symbol)
+      )
+    end
+  end
+
+  def add_number_list(number_list, _, _, ""), do: number_list
+
+  def add_number_list(number_list, y, x, number_string) do
+    number = %NumberPos{
+      value: String.to_integer(number_string),
+      y: y,
+      end_x: x - 1,
+      start_x: x - String.length(number_string)
+    }
+
+    [number | number_list]
+  end
+
+  def add_symbol_list(symbol_list, y, x, symbol) do
+    [%SymbolPos{value: symbol, y: y, x: x} | symbol_list]
+  end
+end
+```
+
+```elixir
+{number_list, symbol_list} = Part1.parse(lines)
+```
+
+```elixir
+number_list
+|> Enum.map(fn number_pos ->
+  Enum.find(
+    symbol_list,
+    fn symbol_pos ->
+      abs(symbol_pos.y - number_pos.y) <= 1 and
+        symbol_pos.x >= number_pos.start_x - 1 and symbol_pos.x <= number_pos.end_x + 1
+    end
+  )
+  |> if do
+    number_pos.value
+  else
+    0
+  end
+end)
+|> Enum.sum()
+```
+
+## Part 2
+
+The engineer finds the missing part and installs it in the engine! As the engine springs to life, you jump in the closest gondola, finally ready to ascend to the water source.
+
+You don't seem to be going very fast, though. Maybe something is still wrong? Fortunately, the gondola has a phone labeled "help", so you pick it up and the engineer answers.
+
+Before you can explain the situation, she suggests that you look out the window. There stands the engineer, holding a phone in one hand and waving with the other. You're going so slowly that you haven't even left the station. You exit the gondola.
+
+The missing part wasn't the only issue - one of the gears in the engine is wrong. A gear is any * symbol that is adjacent to exactly two part numbers. Its gear ratio is the result of multiplying those two numbers together.
+
+This time, you need to find the gear ratio of every gear and add them all up so that the engineer can figure out which gear needs to be replaced.
+
+Consider the same engine schematic again:
+
+<pre>
+467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..
+</pre>
+
+In this schematic, there are two gears. The first is in the top left; it has part numbers 467 and 35, so its gear ratio is 16345. The second gear is in the lower right; its gear ratio is 451490. (The * adjacent to 617 is not a gear because it is only adjacent to one part number.) Adding up all of the gear ratios produces 467835.
+
+What is the sum of all of the gear ratios in your engine schematic?
+
+```elixir
+symbol_list
+|> Enum.map(fn
+  %SymbolPos{value: "*"} = symbol_pos ->
+    number_list
+    |> Enum.filter(fn number_pos ->
+      abs(symbol_pos.y - number_pos.y) <= 1 and
+        symbol_pos.x >= number_pos.start_x - 1 and symbol_pos.x <= number_pos.end_x + 1
+    end)
+    |> case do
+      [number_1, number_2] ->
+        number_1.value * number_2.value
+
+      _ ->
+        0
+    end
+
+  _ ->
+    0
+end)
+|> Enum.sum()
+```
