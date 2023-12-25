@@ -81,3 +81,6 @@ main = do
     putStrLn $ "Steps it takes to point furthest away from starting point: " ++ show ((length result +1) `div` 2)
     
     
+    -- Part 2 (Area of space enclosed by pipe loop)
+    -- Go through each coordinate, check if it is enclosed by the loop -> Try Ray Casting (hope this is fast enough)
+    -- Find the number of coordinates 'interior' to the loop = Area of space enclosed by loop
