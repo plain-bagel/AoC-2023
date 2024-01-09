@@ -1,6 +1,6 @@
 # [AoC-2023][aoc-2023]
 
-[//]: # (배너 이미지 추가하기)
+![](./assets/aoc_cover-512x512.jpeg)
 
 [![](https://img.shields.io/badge/Advent%20of%20Code-000000?style=for-the-badge&logo=adventofcode&logoColor=white&)][aoc-official] [![](https://img.shields.io/badge/Plain%20Bagel-FFA500?style=for-the-badge&logo=plainbagel&logoColor=white)][pbagel-official] [![licence](https://img.shields.io/github/license/plain-bagel/AoC-2023?style=for-the-badge)](./LICENSE) [![](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://plainbagel.slack.com/archives/C067RSCDC78)
 
